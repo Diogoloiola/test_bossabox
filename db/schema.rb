@@ -11,7 +11,15 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_06_16_224452) do
-  create_table "locations", force: :cascade do |t|
+  create_table "tags", force: :cascade do |t|
+    t.string "description"
+    t.integer "tool_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tool_id"], name: "index_tags_on_tool_id"
+  end
+
+  create_table "tools", force: :cascade do |t|
     t.string "title"
     t.text "link"
     t.string "description"
@@ -19,13 +27,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_16_224452) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "tags", force: :cascade do |t|
-    t.string "description"
-    t.integer "location_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["location_id"], name: "index_tags_on_location_id"
-  end
-
-  add_foreign_key "tags", "locations"
+  add_foreign_key "tags", "tools"
 end

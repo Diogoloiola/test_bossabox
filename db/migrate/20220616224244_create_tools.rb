@@ -1,6 +1,6 @@
-class CreateLocations < ActiveRecord::Migration[7.0]
+class CreateTools < ActiveRecord::Migration[7.0]
   def change
-    create_table :locations do |t|
+    create_table :tools do |t|
       t.string :title
       t.text :link
       t.string :description

@@ -1,4 +1,4 @@
-class Location < ApplicationRecord
+class Tool < ApplicationRecord
   include Filterable
 
   has_many :tags, dependent: :destroy

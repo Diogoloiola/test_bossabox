@@ -1,3 +1,3 @@
 class Tag < ApplicationRecord
-  belongs_to :location
+  belongs_to :tool
 end
