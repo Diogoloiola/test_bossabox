@@ -2,7 +2,7 @@ class LocationsController < ApplicationController # rubocop:disable Style/Docume
   before_action :set_location, only: %i[show update destroy]
 
   def index
-    @locations = Location.all
+    @locations = Location.filter(permitted_params_filter).all
   end
 
   def show; end
@@ -33,6 +33,10 @@ class LocationsController < ApplicationController # rubocop:disable Style/Docume
 
   def set_location
     @location = Location.find(params[:id])
+  end
+
+  def permitted_params_filter
+    params.permit(:tag)
   end
 
   def location_params
