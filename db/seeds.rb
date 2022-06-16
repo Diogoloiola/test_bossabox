@@ -1,7 +1,18 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+Rails.logger.debug '============== IMPORTANDO DADOS ============'
+
+full_path_json = Rails.root.join('db/data/mock.json')
+
+locations = JSON.parse(File.read(full_path_json))
+
+locations.each do |location|
+  location_database = Location.create!(
+    title: location['title'],
+    description: location['description'],
+    link: location['link']
+  )
+
+  location['tags'].each do |tag|
+    Tag.create!(description: tag, location_id: location_database.id)
+  end
+end
+Rails.logger.debug '============== IMPORTANDO DADOS ============'
